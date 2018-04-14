@@ -1,0 +1,9 @@
+<%= form_tag({action: 'convert'}, multipart: true) do %>
+  <div id="file-upload">
+    Upload original image: <%= file_field_tag 'original_picture' %>
+  </div>
+  <div id="choose-format">
+    Choose format: <%= select_tag 'format', '<option>png</option><option>jpg</option><option>svg</option>'.html_safe %>
+  </div>
+  <%= submit_tag %>
+<% end %>
