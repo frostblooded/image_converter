@@ -6,7 +6,6 @@ class ImageController < ApplicationController
     # TODO: Make sure invalid formats aren't being passed in.
     image_file = params[:original_image].tempfile
 
-    # TODO: Check if original format equals desired format
     original_format = get_original_format params
     desired_format = params[:desired_format]
 

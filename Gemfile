@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'aws-sdk-s3', '~> 1'
 
+gem 'docker-api', '~> 1.34.2'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

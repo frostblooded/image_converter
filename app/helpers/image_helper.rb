@@ -1,9 +1,9 @@
 module ImageHelper
   BUCKET_NAME = 'bg.image.converter'.freeze
 
-  def self.save_file_to_path(file, path)
+  def self.save_file_to_path(file_contents, path)
     File.open(path, 'wb+') do |f|
-      f.write file.read
+      f.write file_contents
     end
   end
 
@@ -18,13 +18,22 @@ module ImageHelper
   end
 
   def self.convert_file(file, original_name, desired_name)
-    ImageHelper.save_file_to_path file, original_name
+    # ImageHelper.save_file_to_path file, original_name
+
+    # Don't actually convert if input and output are the same
+    return if original_name == desired_name
 
     # TODO: Run the conversion in a Docker container
-    # TODO: The status code of the operation should be handled. For example if there was an error.
-    `convert #{original_name} #{desired_name}`
+    # TODO: Handle conversion status code
+    image = Docker::Image.create(fromImage: 'ncsapolyglot/converters-imagemagick')
+    container = image.run
+    container.store_file('/' + original_name, file.read)
+    container.exec(['convert', original_name, desired_name])
+    container.exec(['ls'])
+    save_file_to_path(container.read_file('/' + original_name), desired_name)
+    container.stop
 
-    File.delete original_name
+    # File.delete original_name
   end
 
   def self.upload_converted_file(file, original_name, desired_name, file_id)
