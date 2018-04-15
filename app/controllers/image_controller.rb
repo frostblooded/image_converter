@@ -16,6 +16,7 @@ class ImageController < ApplicationController
     file_id = get_file_id image_file
     original_name = get_original_name file_id, original_format
     desired_name = get_desired_name file_id, desired_format
+
     ImageHelper.upload_converted_file image_file, original_name,
                                       desired_name, file_id
 

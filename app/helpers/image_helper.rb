@@ -13,7 +13,8 @@ module ImageHelper
     # image_object = bucket.put_object({body: file, key: file_id})
 
     # Of course it would probably be best to use the AWS gem here, but for
-    # some reason it takes about 30 seconds to upload an image
+    # some reason it takes about 30 seconds to upload an image when I am using it,
+    # but it works fine like this
     `~/.local/bin/aws s3 cp #{file_path} s3://#{bucket_name}/#{desired_name}`
   end
 
@@ -25,6 +26,7 @@ module ImageHelper
 
     # TODO: Run the conversion in a Docker container
     # TODO: Handle conversion status code
+    # TODO: Don't start a container every time. Use one that is already running.
     image = Docker::Image.create(fromImage: 'ncsapolyglot/converters-imagemagick')
     container = image.run
     container.store_file('/' + original_name, file.read)
