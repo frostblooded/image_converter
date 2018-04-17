@@ -24,16 +24,16 @@ module ImageHelper
     # Don't actually convert if input and output are the same
     return if original_name == desired_name
 
-    # TODO: Run the conversion in a Docker container
     # TODO: Handle conversion status code
     # TODO: Don't start a container every time. Use one that is already running.
-    image = Docker::Image.create(fromImage: 'ncsapolyglot/converters-imagemagick')
-    container = image.run
+    # Presumes that the Docker container is already running in the background
+    containers = Docker::Container.all(filters: {ancestor: ['ncsapolyglot/converters-imagemagick']}.to_json)
+    container = containers.first
     container.store_file('/' + original_name, file.read)
     container.exec(['convert', original_name, desired_name])
-    container.exec(['ls'])
     save_file_to_path(container.read_file('/' + original_name), desired_name)
-    container.stop
+    container.exec(['rm', original_name])
+    container.exec(['rm', desired_name])
 
     # File.delete original_name
   end
