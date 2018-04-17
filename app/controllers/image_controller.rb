@@ -1,5 +1,5 @@
 class ImageController < ApplicationController
-  IMAGE_TMP_SAVE_PATH = 'tmp/'.freeze
+  IMAGE_TMP_SAVE_PATH = '/tmp/'.freeze
   BUCKET_PUBLIC_URL = 'https://s3.eu-west-3.amazonaws.com/bg.image.converter/'.freeze
 
   def convert

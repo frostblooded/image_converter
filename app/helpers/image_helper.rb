@@ -19,23 +19,20 @@ module ImageHelper
   end
 
   def self.convert_file(file, original_name, desired_name)
-    # ImageHelper.save_file_to_path file, original_name
-
     # Don't actually convert if input and output are the same
     return if original_name == desired_name
 
+
+
     # TODO: Handle conversion status code
-    # TODO: Don't start a container every time. Use one that is already running.
     # Presumes that the Docker container is already running in the background
     containers = Docker::Container.all(filters: {ancestor: ['ncsapolyglot/converters-imagemagick']}.to_json)
     container = containers.first
-    container.store_file('/' + original_name, file.read)
+    container.store_file(original_name, file.read)
     container.exec(['convert', original_name, desired_name])
-    save_file_to_path(container.read_file('/' + original_name), desired_name)
+    save_file_to_path(container.read_file(original_name), desired_name)
     container.exec(['rm', original_name])
     container.exec(['rm', desired_name])
-
-    # File.delete original_name
   end
 
   def self.upload_converted_file(file, original_name, desired_name, file_id)
