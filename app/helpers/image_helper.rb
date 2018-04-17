@@ -23,11 +23,12 @@ module ImageHelper
     # Don't actually convert if input and output are the same
     return if original_name == desired_name
 
+    # TODO: Use docker compose to run the conversion container with the server
     # TODO: Handle conversion status code
-    # TODO: Containerize the Rails app and make it start the conversion container
+    # TODO: Containerize the server and make it start the conversion container
     # Presumes that the Docker container is already running in the background
     # Find docker based on its image (AKA ancestor)
-    container_filters = {ancestor:[DOCKER_CONVERSION_IMAGE]}.to_json
+    container_filters = { ancestor: [DOCKER_CONVERSION_IMAGE] }.to_json
     container = Docker::Container.all(filters: container_filters).first
     container.store_file(original_name, file.read)
     container.exec(['convert', original_name, desired_name])

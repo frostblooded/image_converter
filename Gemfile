@@ -30,7 +30,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'aws-sdk-s3', '~> 1'
+# Not currenlty used
+# gem 'aws-sdk-s3', '~> 1'
 
 gem 'docker-api', '~> 1.34.2'
 

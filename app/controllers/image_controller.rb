@@ -10,9 +10,9 @@ class ImageController < ApplicationController
     desired_format = params[:desired_format]
 
     # Use the object id to name the file. This is obviously a poor solution
-    # since the object_id is not unique and an image can be overwritten at some point
-    # if we choose to store the images with names based on their object_id,
-    # but it works fine for this application.
+    # since the object_id is not unique and an image can be overwritten
+    # at some point if we choose to store the images with names based
+    # on their object_id, but it works fine for this application.
     file_id = get_file_id image_file
     original_name = get_original_name file_id, original_format
     desired_name = get_desired_name file_id, desired_format
