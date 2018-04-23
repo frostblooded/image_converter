@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    image: frostblooded/image-converter
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "80:3000"
+    networks:
+      - webnet
+    # Exposing the docker socket and the Docker binary, so that the web
+    # service can access the other container for the image conversion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ~/.aws/credentials:/root/.aws/credentials
+      - ~/.aws/config:/root/.aws/config
+  converter:
+    image: ncsapolyglot/converters-imagemagick
+networks:
+  webnet:
