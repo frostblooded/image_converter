@@ -43,10 +43,15 @@ module ImageHelper
     puts "Lambda response: #{resp.payload.string}"
   end
 
+  def self.test_ses
+    MyMailer.send_email.deliver
+  end
+
   def self.upload_converted_file(file, original_name, desired_name, file_id)
     ImageHelper.convert_file file, original_name, desired_name
     ImageHelper.upload_file_to_s3 desired_name, file_id, BUCKET_NAME
     File.delete desired_name
     ImageHelper.test_lambda_call
+    ImageHelper.test_ses
   end
 end
