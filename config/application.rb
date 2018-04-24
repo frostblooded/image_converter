@@ -15,8 +15,6 @@ module ImageConverter
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.action_controller.asset_host = 'bg-image-converter.s3.eu-west-3.amazonaws.com'
-    config.action_mailer.asset_host = 'http://bg-image-converter.s3.eu-west-3.amazonaws.com'
     config.assets.digest = true
     config.assets.enabled = true
   end

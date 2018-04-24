@@ -28,6 +28,8 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   config.serve_static_assets = true
+  config.action_controller.asset_host = 'bg-image-converter.s3.eu-west-3.amazonaws.com'
+  config.action_mailer.asset_host = 'http://bg-image-converter.s3.eu-west-3.amazonaws.com'
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
