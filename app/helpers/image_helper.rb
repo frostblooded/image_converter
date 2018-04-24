@@ -1,5 +1,5 @@
 module ImageHelper
-  BUCKET_NAME = 'bg.image.converter'.freeze
+  BUCKET_NAME = 'bg-image-converter'.freeze
   DOCKER_CONVERSION_IMAGE = 'ncsapolyglot/converters-imagemagick'.freeze
 
   def self.save_file_to_path(file_contents, path)

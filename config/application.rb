@@ -14,6 +14,10 @@ module ImageConverter
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    config.web_console.whitelisted_ips = '172.19.0.1'
+
+    config.action_controller.asset_host = 'bg-image-converter.s3.eu-west-3.amazonaws.com'
+    config.action_mailer.asset_host = 'http://bg-image-converter.s3.eu-west-3.amazonaws.com'
+    config.assets.digest = true
+    config.assets.enabled = true
   end
 end
