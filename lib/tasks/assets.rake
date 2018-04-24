@@ -1,6 +1,6 @@
 namespace :assets do
   task sync: :environment do
-    `aws s3 sync public/ s3://bg-image-converter/assets`
+    `aws s3 sync public/assets s3://bg-image-converter/assets`
   end
 end
 
