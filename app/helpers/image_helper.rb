@@ -37,9 +37,16 @@ module ImageHelper
     container.exec(['rm', desired_name])
   end
 
+  def self.test_lambda_call
+    client = Aws::Lambda::Client.new region: 'eu-west-3'
+    resp = client.invoke(function_name: 'python_test', invocation_type: 'RequestResponse')
+    puts "Lambda response: #{resp.payload.string}"
+  end
+
   def self.upload_converted_file(file, original_name, desired_name, file_id)
     ImageHelper.convert_file file, original_name, desired_name
     ImageHelper.upload_file_to_s3 desired_name, file_id, BUCKET_NAME
     File.delete desired_name
+    test_lambda_call
   end
 end

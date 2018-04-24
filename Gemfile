@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # Not currenlty used
 # gem 'aws-sdk-s3', '~> 1'
 
+gem 'aws-sdk-lambda', '~> 1.5.0'
+
 gem 'docker-api', '~> 1.34.2'
 
 # Use Capistrano for deployment

@@ -1,6 +1,6 @@
 class ImageController < ApplicationController
   IMAGE_TMP_SAVE_PATH = '/tmp/'.freeze
-  BUCKET_PUBLIC_URL = 'https://s3.eu-west-3.amazonaws.com/bg.image.converter/'.freeze
+  BUCKET_PUBLIC_URL = "https://s3.eu-west-3.amazonaws.com/#{ImageHelper::BUCKET_NAME}/".freeze
 
   def convert
     # TODO: Make sure invalid formats aren't being passed in.
