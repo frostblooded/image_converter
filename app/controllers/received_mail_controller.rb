@@ -1,6 +1,6 @@
 require 'net/http'
 
-class UnreceivedMailController < ApplicationController
+class ReceivedMailController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def endpoint
@@ -10,10 +10,10 @@ class UnreceivedMailController < ApplicationController
     if type == 'SubscriptionConfirmation'
       confirm_subscription body
     elsif type == 'Notification'
-      handle_unreceived_mail
+      handle_received_mail body
     end
 
-    render status: 200
+    render plain: 'OK', status: 200
   end
 
   private
@@ -26,7 +26,7 @@ class UnreceivedMailController < ApplicationController
     puts 'Subscription confirmed'
   end
 
-  def handle_unreceived_mail
-
+  def handle_received_mail(body)
+    puts "Received mail: #{body}"
   end
 end

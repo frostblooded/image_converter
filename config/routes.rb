@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :unreceived_mail do
+  resources :received_mail do
     collection do
       post :endpoint
     end
