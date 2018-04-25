@@ -6,4 +6,10 @@ Rails.application.routes.draw do
       post :convert
     end
   end
+
+  resources :unreceived_mail do
+    collection do
+      post :endpoint
+    end
+  end
 end

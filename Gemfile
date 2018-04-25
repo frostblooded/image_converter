@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'aws-sdk-lambda', '~> 1.5.0'
 gem 'aws-sdk-rails', '~> 2.0.1'
+gem 'aws-sdk-sns', '~> 1.1.0'
 
 gem 'docker-api', '~> 1.34.2'
 

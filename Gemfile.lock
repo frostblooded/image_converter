@@ -55,6 +55,9 @@ GEM
     aws-sdk-ses (1.6.0)
       aws-sdk-core (~> 3)
       aws-sigv4 (~> 1.0)
+    aws-sdk-sns (1.1.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.2)
     bindex (0.5.0)
     builder (3.2.3)
@@ -198,6 +201,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-lambda (~> 1.5.0)
   aws-sdk-rails (~> 2.0.1)
+  aws-sdk-sns (~> 1.1.0)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
