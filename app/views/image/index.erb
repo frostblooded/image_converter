@@ -5,5 +5,5 @@
     <div id="choose-format">
       Choose format: <%= select_tag 'desired_format', '<option>png</option><option>jpg</option>'.html_safe %>
     </div>
-    <%= submit_tag %>
+    <%= submit_tag 'Convert', id: 'submit' %>
 <% end %>

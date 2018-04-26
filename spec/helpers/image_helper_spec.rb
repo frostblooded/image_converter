@@ -2,14 +2,14 @@ require 'rails_helper'
 require 'open-uri'
 
 describe ImageHelper do
-  IMAGE_PATH = File.expand_path(File.join(__dir__, '..', 'image')).freeze
+  IMAGE_BASE_PATH = File.expand_path(File.join(__dir__, '..', 'image')).freeze
 
   before :all do
     FakeFS.activate!
   end
 
   before do
-    @original_name = IMAGE_PATH + '.png'
+    @original_name = IMAGE_BASE_PATH + '.png'
     FakeFS::FileSystem.clone(@original_name)
 
     # Tempfile uses /tmp, but it isn't in FakeFS
@@ -34,15 +34,8 @@ describe ImageHelper do
   end
 
   describe '#convert_file' do
-    it 'doesn\'t do anything if original and desired name are equal' do
-      @desired_name = @original_name
-      expect(ImageHelper).not_to receive(:convert_in_container)
-      ImageHelper.convert_file @tempfile, @original_name, @desired_name
-      expect(Dir.glob(@desired_name).length).to eq 1
-    end
-
     it 'converts and deletes files correctly' do
-      @desired_name = IMAGE_PATH + '.jpg'
+      @desired_name = IMAGE_BASE_PATH + '.jpg'
       ImageHelper.convert_file @tempfile, @original_name, @desired_name
       expect(Dir.glob(@desired_name).length).to eq 1
     end
@@ -54,7 +47,7 @@ describe ImageHelper do
       allow(ImageHelper).to receive :test_lambda_call
       allow(ImageHelper).to receive :test_ses
 
-      @desired_name = IMAGE_PATH + '.jpg'
+      @desired_name = IMAGE_BASE_PATH + '.jpg'
 
       ImageHelper.upload_converted_file @tempfile, @original_name,
                                         @desired_name, SecureRandom.hex

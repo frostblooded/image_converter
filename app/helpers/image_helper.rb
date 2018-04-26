@@ -16,22 +16,15 @@ module ImageHelper
   end
 
   def self.convert_file(file, original_name, desired_name)
-    # Don't actually convert if input and output are the same
-    return if original_name == desired_name
-
-    # TODO: Handle conversion status code
     # Presumes that the Docker container is already running in the background
     # Finds docker container based on its image (AKA ancestor)
     container_filters = { ancestor: [DOCKER_CONVERSION_IMAGE] }.to_json
     container = Docker::Container.all(filters: container_filters).first
-    ImageHelper.convert_in_container file, original_name,
-                                     desired_name, container
-  end
 
-  def self.convert_in_container(file, original_name, desired_name, container)
+    # TODO: Handle conversion status code
     container.store_file(original_name, file.read)
     container.exec(['convert', original_name, desired_name])
-    save_file_to_path(container.read_file(original_name), desired_name)
+    ImageHelper.save_file_to_path(container.read_file(original_name), desired_name)
     container.exec(['rm', original_name])
     container.exec(['rm', desired_name])
   end
