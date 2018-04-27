@@ -3,7 +3,7 @@
       Upload original image: <%= file_field_tag 'original_image' %>
     </div>
     <div id="choose-format">
-      Choose format: <%= select_tag 'desired_format', '<option>png</option><option>jpg</option>'.html_safe %>
+      Choose format: <%= select_tag 'desired_format', '<option>png</option><option>jpeg</option>'.html_safe %>
     </div>
     <%= submit_tag 'Convert', id: 'submit' %>
 <% end %>

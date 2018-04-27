@@ -19,8 +19,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
-      - ~/.aws/credentials:/root/.aws/credentials
-      - ~/.aws/config:/root/.aws/config
+      - /root/.aws/credentials:/root/.aws/credentials
+      - /root/.aws/config:/root/.aws/config
   converter:
     image: ncsapolyglot/converters-imagemagick
 networks:
