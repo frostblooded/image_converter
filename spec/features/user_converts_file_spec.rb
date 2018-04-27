@@ -5,7 +5,7 @@ feature 'User converts image' do
     visit root_path
 
     attach_file 'original_image', TEST_IMAGE_PATH
-    select 'jpg', from: 'desired_format'
+    select 'jpeg', from: 'desired_format'
     click_button 'submit'
 
     expect(page).to have_css('img')
