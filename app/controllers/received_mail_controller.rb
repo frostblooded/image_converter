@@ -13,7 +13,9 @@ class ReceivedMailController < ApplicationController
       handle_received_mail body
     end
 
-    render plain: 'OK', status: 200
+    # For some reason I can't make it return empty response,
+    # so it just returns 'OK'
+    render json: '', status: 200
   end
 
   private
