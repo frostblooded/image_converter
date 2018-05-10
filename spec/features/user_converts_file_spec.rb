@@ -1,6 +1,12 @@
 require 'rails_helper'
 
-feature 'User converts image' do
+feature 'User converts image', type: :feature do
+  before do
+    allow(ImageHelper).to receive :upload_file_to_s3
+    allow(ImageHelper).to receive :test_lambda_call
+    allow(ImageHelper).to receive :test_ses
+  end
+
   scenario 'to other format' do
     visit root_path
 

@@ -42,11 +42,13 @@ describe ImageHelper do
   end
 
   describe '#upload_converted_file' do
-    it 'removes file after upload' do
+    before do
       allow(ImageHelper).to receive :upload_file_to_s3
       allow(ImageHelper).to receive :test_lambda_call
       allow(ImageHelper).to receive :test_ses
+    end
 
+    it 'removes file after upload' do
       @desired_name = IMAGE_BASE_PATH + '.jpg'
 
       ImageHelper.upload_converted_file @tempfile, @original_name,
