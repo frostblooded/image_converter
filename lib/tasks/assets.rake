@@ -4,4 +4,4 @@ namespace :assets do
   end
 end
 
-Rake::Task['assets:precompile'].enhance(['assets:sync'])
+# Rake::Task['assets:precompile'].enhance(['assets:sync'])
